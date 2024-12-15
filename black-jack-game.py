@@ -3,7 +3,7 @@ import random
 
 def create_deck():
     """Create a standard deck of 52 playing cards."""
-    suits = ["C", "D", "H", "S"]  # Clubs, Diamonds, Hearts, Spades
+    suits = ["C", "D", "H", "S"]  
     values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
     return [{"rank": value, "suit": suit} for suit in suits for value in values]
 
