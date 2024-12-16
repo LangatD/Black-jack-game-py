@@ -1,11 +1,19 @@
 {
     "_meta": {
         "hash": {
+<<<<<<< HEAD
             "sha256": "f631551096db899afac6b5960dd0e434797efd70824bf434cfc48cae610dfce3"
         },
         "pipfile-spec": 6,
         "requires": {
             "python_version": "3."
+=======
+            "sha256": "7f7606f08e0544d8d012ef4d097dabdd6df6843a28793eb6551245d4b2db4242"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.8"
+>>>>>>> main
         },
         "sources": [
             {
@@ -15,6 +23,7 @@
             }
         ]
     },
+<<<<<<< HEAD
     "default": {
         "colorama": {
             "hashes": [
@@ -26,5 +35,8 @@
             "version": "==0.4.6"
         }
     },
+=======
+    "default": {},
+>>>>>>> main
     "develop": {}
 }
