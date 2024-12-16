@@ -1,6 +1,7 @@
 import random
 import time
 from colorama import init, Fore, Back, Style
+from replit import clear
 
 init(autoreset=True)
 suits = ("Spades ♠", "Clubs ♣", "Hearts ♥", "Diamonds ♦")
@@ -121,6 +122,10 @@ def show_some(player, dealer):
     print(" <card hidden>")
     print("", dealer.cards[1])
 
+def show_results(player,dealer):
+    print("Player's Hand =", player.value)
+    print("Dealer's Hand =", dealer.value)
+
 
 def show_all(player, dealer):
     print("\nPlayer's Hand:", *player.cards, sep="\n ")
@@ -157,7 +162,9 @@ def print_colored():
     print(Fore.YELLOW + "                          Let's Play!")
     print(Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
 
+
 while True:
+    clear()
     print_colored()
 
     print(
@@ -192,6 +199,15 @@ while True:
             print("\nDealer's Hand:", *dealer_hand.cards, sep="\n ")
             print("Dealer's Hand =", dealer_hand.value)
             player_busts(player_hand, dealer_hand)
+            time.sleep(1)
+            print("\n----------------------------------------------------------------")
+            print("                     ★ Final Results ★")
+            print("----------------------------------------------------------------")
+
+            show_results(player_hand, dealer_hand)
+           #show_all(player_hand, dealer_hand)
+
+
             break
 
         # If the player chooses to stand, show results immediately
@@ -223,11 +239,13 @@ while True:
             break
 
     # Ask to play again
-    new_game = input("\nPlay another hand? [Y/N] ")
+    new_game = input("\nDo you want to play again? [Y/N] ")
     while new_game.lower() not in ["y", "n"]:
         new_game = input("Invalid Input. Please enter 'y' or 'n' ")
     if new_game[0].lower() == "y":
+        clear()
         playing = True
+        clear()
         continue
     else:
         print("\n------------------------Thanks for playing!---------------------\n")
