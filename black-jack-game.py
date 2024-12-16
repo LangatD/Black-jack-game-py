@@ -88,30 +88,7 @@ class Hand:
             self.aces -= 1  # reduce the count of aces
 
 
-# FUNCTION DEFINITIONS:
 
-# def hit(deck, hand):
-#     hand.add_card(deck.deal())
-#     hand.adjust_for_ace()
-
-
-# def hit_or_stand(deck, hand):
-#     global playing
-
-#     while True:
-#         x = input("\nWould you like to Hit or Stand? Enter [h/s] ")
-
-#         if x[0].lower() == "h":
-#             hit(deck, hand)  # hit() function defined above
-
-#         elif x[0].lower() == "s":
-#             print("Player stands. Dealer is playing.")
-#             playing = False
-
-#         else:
-#             print("Sorry, Invalid Input. Please enter [h/s].")
-#             continue
-#         break
 
 
 def show_some(player, dealer):
@@ -129,25 +106,6 @@ def show_all(player, dealer):
     print("Dealer's Hand =", dealer.value)
 
 
-# def player_busts(player, dealer):
-#     print("\n--- Player busts! ---")
-#     print("--- Dealer wins! ---")  # Explicitly announce that the dealer wins after a player bust.
-
-
-# def player_wins(player, dealer):
-#     print("\n--- Player has blackjack! You win! ---")
-
-
-# def dealer_busts(player, dealer):
-#     print("\n--- Dealer busts! You win! ---")
-
-
-# def dealer_wins(player, dealer):
-#     print("\n--- Dealer wins! ---")
-
-
-# def push(player, dealer):
-#     print("\nIt's a tie!")
 
 
 # GAMEPLAY!
@@ -181,45 +139,6 @@ while True:
     # Show the cards:
     show_some(player_hand, dealer_hand)
 
-    # while playing:  # recall this variable from our hit_or_stand function
-
-    #     # Prompt for Player to Hit or Stand
-    #     hit_or_stand(deck, player_hand)
-    #     show_some(player_hand, dealer_hand)
-
-    #     if player_hand.value > 21:
-    #         # Reveal the dealer's hidden card when the player busts
-    #         print("\nDealer's Hand:", *dealer_hand.cards, sep="\n ")
-    #         print("Dealer's Hand =", dealer_hand.value)
-    #         player_busts(player_hand, dealer_hand)
-    #         break
-
-    # # If Player hasn't busted, play Dealer's hand
-    # if player_hand.value <= 21:
-
-    #     while dealer_hand.value < 17:
-    #         hit(deck, dealer_hand)
-
-        # Show all cards
-        # time.sleep(1)
-        # print("\n----------------------------------------------------------------")
-        # print("                     ★ Final Results ★")
-        # print("----------------------------------------------------------------")
-
-        # show_all(player_hand, dealer_hand)
-
-        # # Test different winning scenarios
-        # if dealer_hand.value > 21:
-        #     dealer_busts(player_hand, dealer_hand)
-
-        # elif dealer_hand.value > player_hand.value:
-        #     dealer_wins(player_hand, dealer_hand)
-
-        # elif dealer_hand.value < player_hand.value:
-        #     player_wins(player_hand, dealer_hand)
-
-        # else:
-        #     push(player_hand, dealer_hand)
 
     # Ask to play again
     new_game = input("\nPlay another hand? [Y/N] ")
