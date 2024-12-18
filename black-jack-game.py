@@ -1,38 +1,19 @@
 import random
 import time
+import os  # Import the os module for clearing the terminal screen
 from colorama import init, Fore, Back, Style
 
+# Initialize colorama for colored text output
 init(autoreset=True)
+
+# Constants for suits, ranks, and values
 suits = ("Spades ♠", "Clubs ♣", "Hearts ♥", "Diamonds ♦")
 ranks = (
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "J",
-    "Q",
-    "K",
-    "A",
+    "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
 )
 values = {
-    "2": 2,
-    "3": 3,
-    "4": 4,
-    "5": 5,
-    "6": 6,
-    "7": 7,
-    "8": 8,
-    "9": 9,
-    "10": 10,
-    "J": 10,
-    "Q": 10,
-    "K": 10,
-    "A": 11,  # Aces initially count as 11
+    "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, 
+    "J": 10, "Q": 10, "K": 10, "A": 11,  # Aces initially count as 11
 }
 
 playing = True
@@ -45,7 +26,7 @@ class Card:
         self.rank = rank
 
     def __str__(self):
-        return self.rank + " of " + self.suit
+        return f"{self.rank} of {self.suit}"
 
 
 class Deck:
@@ -115,31 +96,37 @@ def hit_or_stand(deck, hand):
 
 
 def show_some(player, dealer):
-    print("\nPlayer's Hand:", *player.cards, sep="\n ")
-    print("Player's Hand =", player.value)
+    print("\nPlayer's Hand:")
+    for card in player.cards:
+        print(f" {card}")
+    print(f"Player's Hand Value = {player.value}")
     print("\nDealer's Hand:")
     print(" <card hidden>")
-    print("", dealer.cards[1])
+    print(" " + str(dealer.cards[1]))  # Convert the card to a string before printing
 
 
 def show_all(player, dealer):
-    print("\nPlayer's Hand:", *player.cards, sep="\n ")
-    print("Player's Hand =", player.value)
-    print("\nDealer's Hand:", *dealer.cards, sep="\n ")
-    print("Dealer's Hand =", dealer.value)
+    print("\nPlayer's Hand:")
+    for card in player.cards:
+        print(f" {card}")
+    print(f"Player's Hand Value = {player.value}")
+    print("\nDealer's Hand:")
+    for card in dealer.cards:
+        print(f" {card}")
+    print(f"Dealer's Hand Value = {dealer.value}")
 
 
 def player_busts(player, dealer):
     print("\n--- Player busts! ---")
-    print("--- Dealer wins! ---")  # Explicitly announce that the dealer wins after a player bust.
+    print("--- Dealer wins! ---")
 
 
 def player_wins(player, dealer):
-    print("\n--- Player has blackjack! You win! ---")
+    print("\n--- Player wins! ---")
 
 
 def dealer_busts(player, dealer):
-    print("\n--- Dealer busts! You win! ---")
+    print("\n--- Dealer busts! Player wins! ---")
 
 
 def dealer_wins(player, dealer):
@@ -150,14 +137,24 @@ def push(player, dealer):
     print("\nIt's a tie!")
 
 
-# GAMEPLAY!
+# GAMEPLAY:
 def print_colored():
     print("\n" + Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
     print(Fore.GREEN + "                ♠♣♥♦ WELCOME TO BLACKJACK! ♠♣♥♦")
     print(Fore.YELLOW + "                          Let's Play!")
     print(Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
 
-while True:
+def show_results(player, dealer):
+    print("Player's Hand =", player.value)
+    print("Dealer's Hand =", dealer.value)
+
+def show_dealer_only(dealer):
+    print("\nDealer's Hand:")
+    print(*dealer.cards, sep="\n ")
+    print("Dealer's Hand =", dealer.value)
+
+def start_game():
+    global playing
     print_colored()
 
     print(
@@ -190,25 +187,34 @@ while True:
         if player_hand.value > 21:
             # Reveal the dealer's hidden card when the player busts
             print("\nDealer's Hand:", *dealer_hand.cards, sep="\n ")
-            print("Dealer's Hand =", dealer_hand.value)
+            print(f"Dealer's Hand Value = {dealer_hand.value}")
+
+            time.sleep(1)
+            print("\n----------------------------------------------------------------")
+            print("                     ★ Final Results ★")
+            print("----------------------------------------------------------------")
+            show_results(player_hand,dealer_hand)
             player_busts(player_hand, dealer_hand)
             break
 
         # If the player chooses to stand, show results immediately
         if not playing:  # If the player has decided to stand, exit loop
+            
             if player_hand.value <= 21:
+                # Dealer's turn
                 while dealer_hand.value < 17:
                     hit(deck, dealer_hand)
+                    show_dealer_only(dealer_hand)
 
-                # Show all cards
+            
+
+                # Test different winning scenarios
                 time.sleep(1)
                 print("\n----------------------------------------------------------------")
                 print("                     ★ Final Results ★")
                 print("----------------------------------------------------------------")
+                show_results(player_hand, dealer_hand)
 
-                show_all(player_hand, dealer_hand)
-
-                # Test different winning scenarios
                 if dealer_hand.value > 21:
                     dealer_busts(player_hand, dealer_hand)
 
@@ -222,13 +228,24 @@ while True:
                     push(player_hand, dealer_hand)
             break
 
-    # Ask to play again
+def play_again():
+    global playing
     new_game = input("\nPlay another hand? [Y/N] ")
     while new_game.lower() not in ["y", "n"]:
         new_game = input("Invalid Input. Please enter 'y' or 'n' ")
+    
     if new_game[0].lower() == "y":
+        os.system("cls" if os.name == "nt" else "clear")  # Clear the terminal screen (Windows/Unix)
         playing = True
-        continue
+        return True  # Return True to keep playing
     else:
         print("\n------------------------Thanks for playing!---------------------\n")
-        break
+        return False  # Return False to stop the game
+
+
+# Game entry point
+if __name__ == "__main__":
+    game_running = True
+    while game_running:
+        start_game()
+        game_running = play_again()  # Continue playing if the player chooses 'y'
