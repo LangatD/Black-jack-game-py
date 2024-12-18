@@ -195,6 +195,15 @@ def start_game():
             print("----------------------------------------------------------------")
             show_results(player_hand,dealer_hand)
             player_busts(player_hand, dealer_hand)
+            time.sleep(1)
+            print("\n----------------------------------------------------------------")
+            print("                     ★ Final Results ★")
+            print("----------------------------------------------------------------")
+
+            show_results(player_hand, dealer_hand)
+           #show_all(player_hand, dealer_hand)
+
+
             break
 
         # If the player chooses to stand, show results immediately
