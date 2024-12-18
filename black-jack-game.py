@@ -2,6 +2,7 @@ import random
 import time
 import os  # Import the os module for clearing the terminal screen
 from colorama import init, Fore, Back, Style
+from art import logo
 
 # Initialize colorama for colored text output
 init(autoreset=True)
@@ -96,20 +97,20 @@ def hit_or_stand(deck, hand):
 
 
 def show_some(player, dealer):
-    print("\nPlayer's Hand:")
+    print("\nYour Hand:")
     for card in player.cards:
         print(f" {card}")
-    print(f"Player's Hand Value = {player.value}")
+    print(f"Your Hand Value = {player.value}")
     print("\nDealer's Hand:")
     print(" <card hidden>")
     print(" " + str(dealer.cards[1]))  # Convert the card to a string before printing
 
 
 def show_all(player, dealer):
-    print("\nPlayer's Hand:")
+    print("\nYour Hand:")
     for card in player.cards:
         print(f" {card}")
-    print(f"Player's Hand Value = {player.value}")
+    print(f"Your Hand Value = {player.value}")
     print("\nDealer's Hand:")
     for card in dealer.cards:
         print(f" {card}")
@@ -138,14 +139,14 @@ def push(player, dealer):
 
 
 # GAMEPLAY:
-def print_colored():
-    print("\n" + Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
-    print(Fore.GREEN + "                ♠♣♥♦ WELCOME TO BLACKJACK! ♠♣♥♦")
-    print(Fore.YELLOW + "                          Let's Play!")
-    print(Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
+# def print_colored():
+#     print("\n" + Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
+#     print(Fore.GREEN + "                ♠♣♥♦ WELCOME TO BLACKJACK! ♠♣♥♦")
+#     print(Fore.YELLOW + "                          Let's Play!")
+#     print(Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
 
 def show_results(player, dealer):
-    print("Player's Hand =", player.value)
+    print("Your Hand =", player.value)
     print("Dealer's Hand =", dealer.value)
 
 def show_dealer_only(dealer):
@@ -155,12 +156,13 @@ def show_dealer_only(dealer):
 
 def start_game():
     global playing
-    print_colored()
+    # print_colored()
+    print("\033[31m",logo,"\033[0m")
 
     print(
-        "Game Rules:  Get as close to 21 as you can without going over!\n\
-        Dealer hits until he/she reaches 17.\n\
-        Aces count as 1 or 11."
+        "Game Rules: Get as close to 21 as you can without going over!\n\
+            Dealer hits until he/she reaches 17.\n\
+            Aces count as 1 or 11."
     )
 
     # Create & shuffle the deck, deal two cards to each player
@@ -203,8 +205,10 @@ def start_game():
             if player_hand.value <= 21:
                 # Dealer's turn
                 while dealer_hand.value < 17:
+                    print("\nDealer hits...")
                     hit(deck, dealer_hand)
                     show_dealer_only(dealer_hand)
+                    show_all(player_hand, dealer_hand)
 
             
 
