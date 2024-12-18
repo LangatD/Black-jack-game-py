@@ -2,6 +2,7 @@ import random
 import time
 import os  # Import the os module for clearing the terminal screen
 from colorama import init, Fore, Back, Style
+from replit import clear
 
 # Initialize colorama for colored text output
 init(autoreset=True)
@@ -116,6 +117,17 @@ def show_all(player, dealer):
     print(f"Dealer's Hand Value = {dealer.value}")
 
 
+def show_all(player, dealer):
+    print("\nPlayer's Hand:")
+    for card in player.cards:
+        print(f" {card}")
+    print(f"Player's Hand Value = {player.value}")
+    print("\nDealer's Hand:")
+    for card in dealer.cards:
+        print(f" {card}")
+    print(f"Dealer's Hand Value = {dealer.value}")
+
+
 def player_busts(player, dealer):
     print("\n--- Player busts! ---")
     print("--- Dealer wins! ---")
@@ -144,6 +156,9 @@ def print_colored():
     print(Fore.YELLOW + "                          Let's Play!")
     print(Fore.RED + Back.WHITE + "*"*64)  # Red text on white background
 
+
+while True:
+    clear()
 def show_results(player, dealer):
     print("Player's Hand =", player.value)
     print("Dealer's Hand =", dealer.value)
@@ -195,6 +210,15 @@ def start_game():
             print("----------------------------------------------------------------")
             show_results(player_hand,dealer_hand)
             player_busts(player_hand, dealer_hand)
+            time.sleep(1)
+            print("\n----------------------------------------------------------------")
+            print("                     ★ Final Results ★")
+            print("----------------------------------------------------------------")
+
+            show_results(player_hand, dealer_hand)
+           #show_all(player_hand, dealer_hand)
+
+
             break
 
         # If the player chooses to stand, show results immediately
