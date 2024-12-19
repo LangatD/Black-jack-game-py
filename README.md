@@ -54,14 +54,16 @@ This project is written entirely in Python and utilizes basic object-oriented pr
    ```bash
    git clone https://github.com/your-username/blackjack-game.git
    cd blackjack-game
-2. nstall the required library:
+2. Install the required library:
 
   ```bash
   pip install colorama
+```
 3. Run the game:
 
   ```bash
     python blackjack.py
+ ```
 ## How to Play
 1. Start the game by running the script:
 
