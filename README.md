@@ -25,9 +25,8 @@ Blackjack (also known as 21) is a popular card game where the goal is to get as 
 - You play against the dealer.
 - The game handles card shuffling, dealing, and value adjustments for Aces dynamically.
 
-This project is written entirely in Python and utilizes basic object-oriented programming (OOP) principles, making it a great learning tool for Python enthusiasts.
+This project is written entirely in Python and utilizes basic object-oriented programming (OOP) principles
 
----
 
 ## Features
 
@@ -43,6 +42,7 @@ This project is written entirely in Python and utilizes basic object-oriented pr
 ## Requirements
 
 - **Python 3.6+**
+-  **`colorama` library** for colored text output.
 
 
 ---
@@ -65,41 +65,47 @@ This project is written entirely in Python and utilizes basic object-oriented pr
 ## How to Play
 1. Start the game by running the script:
 
- ```bash
- python blackjack.py
+  ```bash
+   python blackjack.py
+  ```
 
 2.  Follow the prompts:
 
-Type h to Hit (draw a card).
-Type s to Stand (end your turn).
-Try to beat the dealer:
+   - Type `h` to **Hit** (draw a card).
+   - Type s to **Stand** (end your turn).
+3. Try to beat the dealer:
 
-Get closer to 21 than the dealer without exceeding it.
-If your hand's value exceeds 21, you bust and lose the round.
-After the game ends, choose whether to play again.
+  - Get closer to 21 than the dealer without exceeding it.
+  - If your hand's value exceeds 21, you bust and lose the round.
+  - After the game ends, choose whether to play again.
 
-File Structure
-plaintext
-Copy code
+## File Structure
+```
 blackjack/
-├── blackjack.py  # Main script
-└── README.md     # Project documentation
-Gameplay Rules
-The dealer and the player are each dealt two cards. The dealer hides one card.
-The player chooses to either:
-Hit: Draw an additional card.
-Stand: End their turn.
-The dealer reveals their hidden card and continues to draw until their hand's value is 17 or higher.
-The winner is determined as follows:
-If the player exceeds 21, they lose (bust).
-If the dealer exceeds 21, the player wins.
-If both stay under 21, the higher hand value wins.
-A tie results in a push (no winner).
-Future Enhancements
-Add betting functionality with virtual currency.
-Support for multiple players.
-Create a graphical user interface (GUI) version.
-Implement save and load game history features.
-Add sound effects for a richer gaming experience.
-License
+├── __pycache__/      # Compiled Python files 
+├── art.py            # Contains game visuals 
+├── black-jack-game.py  # Main game script
+├── Pipfile           # Dependencies managed with Pipenv
+├── Pipfile.lock      # Locked dependency versions
+└── README.md         # Project documentation
+```
+## Gameplay Rules
+1. The dealer and the player are each dealt two cards. The dealer hides one card.
+2. The player chooses to either:
+ - **Hit:** Draw an additional card.
+ - **Stand:** End their turn.
+3. The dealer reveals their hidden card and continues to draw until their hand's value is 17 or higher.
+4. The winner is determined as follows:
+   - If the player exceeds 21, they lose (bust).
+   - If the dealer exceeds 21, the player wins.
+   - If both stay under 21, the higher hand value wins.
+   - A tie results in a push (no winner).
+     
+## Future Enhancements
+- Add betting functionality with virtual currency.
+- Support for multiple players.
+- Create a graphical user interface (GUI) version.
+- Implement save and load game history features.
+
+## License
 This project is licensed under the MIT License. 
